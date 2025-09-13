@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #variables
-dt = 1
-t_max = 1
+dt = 0.005
+t_max = 35
 
 #initial conditions
 t_0 = 0
@@ -29,6 +29,7 @@ def diff_funcs(x_0,v_0,t_0,dt,t_max): #eulers method to approximate sine wave
         vinit = v - dt * x
         x = x + dt * (v + vinit) * 0.5
         v = v - dt * (x + xinit) * 0.5
+        t = t + dt
     return position, time
 
 position, time = diff_funcs(x_0,v_0,t_0,dt,t_max)
