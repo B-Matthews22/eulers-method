@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 #variables
 dt    = 0.02
 t_max = 20
@@ -24,7 +24,7 @@ def diff_funcs(x_0,y_0,t_0,dt,t_max):
         dy = -x
         y = y + dy * dt
         t = t + dt
-        positionx.append(x*y)
+        positionx.append(x)
         positiony.append(y)
         time.append(t)
     return positionx, positiony, time
