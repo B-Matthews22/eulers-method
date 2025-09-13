@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 #variables
-dt    = 0.02
+dt    = 0.1
 t_max = 35
 
 #initial conditions
@@ -17,9 +17,7 @@ def sine_wave():
 
 
 def diff_funcs(x_0,y_0,t_0,dt,t_max):
-    x = x_0
-    y = y_0
-    t = t_0
+    x , y , t = x_0 , y_0 , t_0
     position = []
     time      = []
     while t <= t_max:
