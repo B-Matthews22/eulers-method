@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #variables
-dt = 0.05
-t_max = 400
+dt = 0.01
+t_max = 10000
 
 #initial conditions
 x_0 = [3,1,0.5,0,-0.5,-0.7]
