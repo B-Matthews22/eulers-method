@@ -8,7 +8,7 @@ the exact solution and the computed solution and see how this varies with time t
 Comment on your results and observed errors
 """
 # variables
-dt      = 0.5
+dt      = 1
 t_max   = 10
 tau     = 2
 
