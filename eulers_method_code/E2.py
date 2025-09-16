@@ -2,11 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #variables
-dt = 0.01
-t_max = 10
+dt = 0.05
+t_max = 200
 
 #initial conditions
-x_0 = [3,1,0.5,0,-0.5,-0.7]
+x_0 = [3,2,1,0.5,0,-0.5,-0.7]
 t_0 = 0
 
 ###
@@ -35,9 +35,6 @@ root_t = [np.sqrt(t) for t in time]
 
 x_vs_t.set_xlabel("Time (s)")
 x_vs_t.set_ylabel("Position")
-x_vs_t.plot(time,root_t, color = "black", label = "x = sqrt(t)")
+x_vs_t.plot(time,root_t, color = "black", label = "x = sqrt(t)",linestyle = "-.")
 x_vs_t.legend()
 plt.show()
-
-
-
