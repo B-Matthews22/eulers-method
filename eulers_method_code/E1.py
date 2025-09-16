@@ -8,7 +8,7 @@ the exact solution and the computed solution and see how this varies with time t
 Comment on your results and observed errors
 """
 # variables
-dt      = 1
+dt      = 0.1
 t_max   = 10
 tau     = 2
 
@@ -19,6 +19,7 @@ time = np.linspace(t_0,t_max,num = int(t_max/dt)+1,endpoint=True)
 N = []
 t_approx = []
 N_approx = []
+error    = []
 
 def decay():
     for t in time:
@@ -42,15 +43,21 @@ def approx_decay():
 decay()
 approx_decay()
 
-area_difference = abs(np.trapz(N_approx,t_approx) - np.trapz(N,time))
+for i in range(len(N)):
+    error.append(np.abs(N[i]-N_approx[i]))
 
-fig     =  plt.figure()
-N_vs_t  = fig.add_subplot()
+fig     =  plt.figure(figsize =(6,10))
+N_vs_t  = fig.add_subplot(2,1,1)
 N_vs_t.set_xlabel("Time (s)")
 N_vs_t.set_ylabel("Count")
 N_vs_t.plot(time, N, color = 'red', label = "True Curve") 
-N_vs_t.plot(t_approx, N_approx, color = 'black', label = "Approximated Curve")
+N_vs_t.plot(t_approx, N_approx, color = 'black', label = "Approximated Curve",linestyle = "-.")
 N_vs_t.legend()
-plt.show()
 
-print("The area difference between the true and approx functions is:" , area_difference)
+err = fig.add_subplot(2,1,2)
+err.set_xlabel("Time (s)")
+err.set_ylabel("Error")
+err.plot(time,error,color = "black",label = "Error")
+err.legend()
+#plt.savefig('E1_graph.svg', format='svg',dpi=1200)
+plt.show()
