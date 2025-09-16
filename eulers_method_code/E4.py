@@ -5,7 +5,7 @@ import numpy as np
 need to graph the difference between approx and exact function
 '''
 #variables
-dt = 0.1
+dt = 0.001
 t_max = 35
 
 #initial conditions
