@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #variables
-dt    = 0.01
+dt    = np.linspace(0.05,0.0005,5,endpoint = True)
 t_max = 35
 
 #initial conditions - y is velocity , dont ask WHY
@@ -31,15 +31,16 @@ def diff_funcs(x_0,y_0,t_0,dt,t_max): #eulers method to approximate sine wave
         t = t + dt
     return position, time
 
-position, time = diff_funcs(x_0,y_0,t_0,dt,t_max)
 x_exact , t_exact = sine_wave()
 
 fig     =  plt.figure()
 x_vs_t  = fig.add_subplot()
 x_vs_t.set_xlabel("Time (s)")
 x_vs_t.set_ylabel("Amplitude (m)")
-x_vs_t.plot(t_exact, x_exact, color = "red", label = "x = sin(y)")
-x_vs_t.plot(time, position, color = "black", label = "Euler Aproximation")
+for t in dt:
+    position, time = diff_funcs(x_0,y_0,t_0,t,t_max)
+    x_vs_t.plot(time, position,linestyle = "-")
+x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "--" , label = "x = sin(y)")
 x_vs_t.legend(loc = 2)
 
 plt.show()
