@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
+from cycler import cycler
+import matplotlib.cm as cm
 import numpy as np
 
 #variables
 dt    = np.linspace(0.05,0.0005,5,endpoint = True)
-t_max = 20*np.pi
+t_max = 10*np.pi
 
 #initial conditions - y is velocity , dont ask WHY
 x_0 = 0 
@@ -32,16 +34,27 @@ def diff_funcs(x_0,y_0,t_0,dt,t_max): #eulers method to approximate sine wave
     return position, time
 
 
-fig     =  plt.figure()
-x_vs_t  = fig.add_subplot()
+fig     =  plt.figure(figsize = (10,5))
+x_vs_t  = fig.add_subplot(1,2,1)
+err     = fig.add_subplot(1,2,2)
 x_vs_t.set_xlabel("Time (s)")
 x_vs_t.set_ylabel("Amplitude (m)")
+
+cmap = cm.plasma  # try "plasma", "tab10", etc.
+colors = cmap(np.linspace(0, 1, len(dt)))
+x_vs_t.set_prop_cycle(cycler(color=colors))
+err.set_prop_cycle(cycler(color=colors))
+
 for dt_val in dt:
     position, time = diff_funcs(x_0,y_0,t_0,dt_val,t_max)
     x_exact,t_exact = sine_wave(len(time))
-    x_vs_t.plot(time, position,label = f"dt = {dt_val:.4f}")
+    x_vs_t.plot(time, position)
+    err.plot(time, position-x_exact)
 
 x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "-." , label = "x = sin(t)")
-x_vs_t.legend(loc = 2)
-
+#x_vs_t.axhline(0,color="black")
+err.axhline(0,color="black",linestyle = "-.")
+x_vs_t.legend()
+x_vs_t.axis([0,t_max,-2.2,2.2])
+err.axis([0,t_max,-2.2,2.2])
 plt.show()
