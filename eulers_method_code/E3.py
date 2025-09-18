@@ -3,7 +3,7 @@ import numpy as np
 
 #variables
 dt    = np.linspace(0.05,0.0005,5,endpoint = True)
-t_max = 35
+t_max = 20*np.pi
 
 #initial conditions - y is velocity , dont ask WHY
 x_0 = 0 
@@ -39,9 +39,9 @@ x_vs_t.set_ylabel("Amplitude (m)")
 for dt_val in dt:
     position, time = diff_funcs(x_0,y_0,t_0,dt_val,t_max)
     x_exact,t_exact = sine_wave(len(time))
-    x_vs_t.plot(time, position,linestyle = "-")
+    x_vs_t.plot(time, position,label = f"dt = {dt_val:.4f}")
 
-x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "--" , label = "x = sin(t)")
+x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "-." , label = "x = sin(t)")
 x_vs_t.legend(loc = 2)
 
 plt.show()
