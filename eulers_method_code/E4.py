@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from cycler import cycler
 import numpy as np
 
 '''
@@ -38,9 +40,14 @@ def diff_funcs(x_0,v_0,t_0,dt,t_max): #eulers method to approximate sine wave
     return position, velocity, time
 
 
-fig     =  plt.figure()
+fig     =  plt.figure(figsize = (10,5))
 x_vs_t  = fig.add_subplot(1,2,1)
 err     = fig.add_subplot(1,2,2)
+
+cmap = cm.plasma  # try "plasma", "tab10", etc.
+colors = cmap(np.linspace(0, 1, len(dt)))
+x_vs_t.set_prop_cycle(cycler(color=colors))
+err.set_prop_cycle(cycler(color=colors))
 
 for step in dt:
     position, velocity, time = diff_funcs(x_0,v_0,t_0,step,t_max)
@@ -51,9 +58,11 @@ for step in dt:
 
 x_vs_t.plot(t, x,label = "x(t)",color = "black")
 #x_vs_t.plot(t, v,label = "v(t)",color = "red")
-x_vs_t.set_xlabel("Time (s)")
+fig.supxlabel("Time (s)")
 x_vs_t.set_ylabel("Amplitude")
 #x_vs_t.plot(t_exact, x_exact,color = "red",label = "Sine wave")
+x_vs_t.axis([0,t_max,-1.2,1.2])
+err.axis([0,t_max,-1.2,1.2])
 x_vs_t.legend(loc=2)
 
 plt.show()
