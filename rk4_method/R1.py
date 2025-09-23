@@ -30,7 +30,8 @@ def main():
     :return:
     """
     # define the initial variables
-    a , b = 1 , 1
+    a = [1,4,20] 
+    b = [1,20,0.5]
     y0 = np.array([0])  # initial state at t = 0
     t0 = 0  # initial time
     tf = 20  # final time
@@ -44,19 +45,23 @@ def main():
     # Call the RK integrator and return the solution in the array "result"
     # Note that because the brackets aren't closed, the method integrate.solve_ivp()
     # behaves as though it was on just one line.
-    result = integrate.solve_ivp(fun=nonlinear1,  # The function defining the derivative
-                                 t_span=(t0, tf),  # Initial and final times
-                                 y0=y0,  # Initial state
-                                 method="RK45",  # Integration method
-                                 args = (a,b),
-                                 t_eval=t)  # Time points for result to be reported
+    for a, b in zip(a,b):
+        result = integrate.solve_ivp(fun=nonlinear1,  # The function defining the derivative
+                                    t_span=(t0, tf),  # Initial and final times
+                                    y0=y0,  # Initial state
+                                    method="RK45",  # Integration method
+                                    args = (a,b),
+                                    t_eval=t)  # Time points for result to be reported
 
-    # Read the solution and time from the array returned by Scipy
-    y = result.y[0]
-    t = result.t
+        # Read the solution and time from the array returned by Scipy
+        y = result.y[0]
+        t = result.t
 
-    # plot the solution
-    plt.plot(t,y,'b.')
+        # plot the solution
+        plt.plot(t,y,label = f"a = {a}, b = {b}")
+    plt.legend()
+    plt.xlabel("Time t")
+    plt.ylabel("f(y,t)")
     plt.show()
 
 
