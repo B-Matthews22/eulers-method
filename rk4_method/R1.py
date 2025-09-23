@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from scipy import integrate
 
 # define the nonlinear derivative function
-def nonlinear1(t, y):
+def nonlinear1(t, y,a,b):
     """
     Calculates the derivative value for the differential equation given in experiment R1
     :param t: a float for the time variable
@@ -16,7 +16,7 @@ def nonlinear1(t, y):
     """
 
     # Calculate the derivative explicitly
-    dydt = -y**3 + np.sin(t)
+    dydt = -a*y**3 + b*np.sin(t)
 
     # return the value
     return dydt
@@ -30,6 +30,7 @@ def main():
     :return:
     """
     # define the initial variables
+    a , b = 1 , 1
     y0 = np.array([0])  # initial state at t = 0
     t0 = 0  # initial time
     tf = 20  # final time
@@ -47,6 +48,7 @@ def main():
                                  t_span=(t0, tf),  # Initial and final times
                                  y0=y0,  # Initial state
                                  method="RK45",  # Integration method
+                                 args = (a,b),
                                  t_eval=t)  # Time points for result to be reported
 
     # Read the solution and time from the array returned by Scipy
