@@ -6,17 +6,17 @@ from pathlib import Path
 
 
 def simple_pendulum(t, y):
-    """
-    Define the two derivatives
-    note that dydt is now an array that holds both of the derivatives
-    :param t: an array of times (floats) - not used in this template
-    :param y: a tuple containing the values x and v
-    :return: the derivative of x and v
-    """
     x, v = y  # extracts the x and v values from the tuple
     dydt = np.array([v, -x])  # generates an array with the rates of change: dxdt = v, dvdt = -x
     return dydt  # returns the array
 
+
+def phase_space(ax, x, v, label = None):
+    """Plot phase space (v vs. x) on a given Axes object."""
+    ax.plot(v, x, 'k',label=label)
+    ax.axis('equal')
+    ax.set_xlabel(r"$Position$")
+    ax.set_ylabel(r"$Velocity$")
 
 def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
@@ -28,12 +28,7 @@ def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basenam
 
 
 def main():
-    """
-    A main function used to ensure that the code is portable. By using if __name__ == '__main__': main() we can ensure
-    that python will not execute the code when functions or methods in this module are imported, only if we run it
-    directly. At this point, this structure isn't needed, but it's a good habit to get into.
-    :return:
-    """
+   
 
     # define the initial parameters
     x0 = 0  # initial position
@@ -42,7 +37,7 @@ def main():
     t0 = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 10*np.pi  # final time
+    tf = 5*np.pi  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
     # Scipy will take more steps if required to control the error in the solution
@@ -61,17 +56,28 @@ def main():
     x, v = result.y
     t = result.t
 
-    # plot position ad velocity as a function of time.
-    plt.plot(t, x, label=r"$x(t)$")
-    plt.plot(t, v, label=r"$v(t)$")
-    plt.legend(loc=1)
+    
+    # Pre-initialize figure and axes
+    fig, (ax_time, ax_phase) = plt.subplots(1, 2, figsize=(12, 5))
 
+    # time evolution subplot
+    ax_time.set_xlabel("Time (s)")
+    ax_time.set_ylabel("Amplitiude")
+    ax_time.plot(t, x, label=r"$x(t)$")
+    ax_time.plot(t, v, label=r"$v(t)$")
+    ax_time.legend(loc=1)
+    
+
+    # phase space subplot
+    phase_space(ax_phase, x, v)
+    
+    
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
     filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
 
     # saves and displays the file
-    plt.savefig(filename, bbox_inches='tight')
-    print("Output file saved to {}.".format(filename))
+    #plt.savefig(filename, bbox_inches='tight')
+    #print("Output file saved to {}.".format(filename))
     plt.show()
 
 if __name__ == '__main__':
