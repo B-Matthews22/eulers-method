@@ -10,11 +10,7 @@ from scipy import integrate
 def nonlinear1(t, y,a,b):
     """
     Calculates the derivative value for the differential equation given in experiment R1
-    :param t: a float for the time variable
-    :param y: a float for the dependent variable
-    :return dydt a float for the derivative of the differential equation:
     """
-
     # Calculate the derivative explicitly
     dydt = -a*y**3 + b*np.sin(t)
 
