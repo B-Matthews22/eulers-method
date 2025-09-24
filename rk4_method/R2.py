@@ -23,9 +23,9 @@ def exact_solution_rl(v, r, l, t):
 
 def main():
 
-    v   = 2
-    r   = 2
-    l   = 2
+    v   = 10
+    r   = 50
+    l   = 100
     i_0 = np.array([0])
     t_0 = 0
     t_f = 40
