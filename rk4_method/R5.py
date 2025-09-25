@@ -9,10 +9,10 @@ def main():
    
 
     # define the initial parameters
-    x0     = 0  # initial position
-    v0     = 1  # initial velocity
-    b      = 0.6
-    omega0 = 2*np.pi
+    x0     = 1  # initial position
+    v0     = 0  # initial velocity
+    b      = 0.1
+    omega0 = 1
     y0     = (x0, v0)  # initial state
     t0     = 0  # initial time
 
