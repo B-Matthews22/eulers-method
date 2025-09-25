@@ -6,7 +6,7 @@ from scipy import integrate
 from pathlib import Path
 
 
-def loop_through(t,omega, b, tf, y0):
+def loop_through(t,omega, A, b, tf, y0):
     """
         THIS ISN'T REALLY A USABLE FUNCTION. IT'S INTENDED TO BE MERGED INTO YOUR REAL CODE
 
@@ -18,7 +18,7 @@ def loop_through(t,omega, b, tf, y0):
     # Loop through list of three driving frequencies (100%, 90%, 50% of omega0)
     for omegad in (omega, 0.9 * omega, 0.5 * omega):
         # Define the anonymous function, including the changing omegad
-        lfun = lambda t, y,: rf.driven_pendulum(t, y, b, omega, omegad)
+        lfun = lambda t, y,: rf.driven_pendulum(t, y, b, omega, A, omegad)
         # Call the solver for this definition of lfun
         result = integrate.solve_ivp(fun=lfun,
                                      t_span=(0, tf),
@@ -29,7 +29,7 @@ def loop_through(t,omega, b, tf, y0):
         t = result.t
         x, v = result.y
         # Plot the result x(t) for this run, lable it with omegad as well
-        plt.plot(t, x, label='$x(t): \omega_d =${}'.format(omegad))
+        plt.plot(t, x)
     # End of loop, continue with next omegad
     # Out of the loop
     # Save and show plot
@@ -46,6 +46,7 @@ def main():
     v0     = 0  # initial velocity
     b      = 2
     omega0 = 1
+    A = 1
     y0     = (x0, v0)  # initial state
     t0     = 0  # initial time
 
@@ -58,7 +59,8 @@ def main():
     # creates an array of the time steps
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
-    loop_through(t,omega0, b, tf, y0)
+    #loop_through(t,omega0, A, b, tf, y0)
+    print("Available names:", dir(rf))
 
 if __name__ == '__main__':
     main()
