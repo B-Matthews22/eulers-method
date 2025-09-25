@@ -29,10 +29,13 @@ def loop_through(t,omega, A, b, tf, y0):
         t = result.t
         x, v = result.y
         # Plot the result x(t) for this run, lable it with omegad as well
-        plt.plot(t, x)
+        plt.plot(t, x, label = f"omegad = {omegad}")
+        
     # End of loop, continue with next omegad
     # Out of the loop
     # Save and show plot
+    plt.xlabel("Time (s)")
+    plt.ylabel("Amplitiude")
     plt.legend()  # Make the plot labels visible
     #plt.savefig('Oscillator-driven-multi.pdf', bbox_inches ='tight')
     plt.show()
@@ -44,14 +47,14 @@ def main():
     # define the initial parameters
     x0     = 1  # initial position
     v0     = 0  # initial velocity
-    b      = 2
+    b      = 0.1
     omega0 = 1
-    A = 1
+    A = 2
     y0     = (x0, v0)  # initial state
     t0     = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 5*np.pi  # final time
+    tf = 20*np.pi  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
     # Scipy will take more steps if required to control the error in the solution
@@ -59,8 +62,7 @@ def main():
     # creates an array of the time steps
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
-    #loop_through(t,omega0, A, b, tf, y0)
-    print("Available names:", dir(rf))
+    loop_through(t,omega0, A, b, tf, y0)
 
 if __name__ == '__main__':
     main()

@@ -9,6 +9,14 @@ def damped_pendulum(t, y, b, omega0):
     return dydt
 
 
+def driven_pendulum(t, y, b, omega0, A, omegad):
+    x, v = y
+    dxdt = v
+    dvdt = -b*v - (omega0**2)*x - A * np.sin(omegad * t)
+    dydt = np.array([dxdt, dvdt])
+    return dydt
+
+
 def phase_space(ax, x, v, label = None):
     """Plot phase space (v vs. x) on a given Axes object."""
     ax.plot(x, v, 'k',label=label)
