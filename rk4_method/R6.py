@@ -5,6 +5,39 @@ import R4_function as rf
 from scipy import integrate
 from pathlib import Path
 
+
+def loop_through(t,omega, b, tf, y0):
+    """
+        THIS ISN'T REALLY A USABLE FUNCTION. IT'S INTENDED TO BE MERGED INTO YOUR REAL CODE
+
+        This code plots the response for three different driving frequencies and displays
+        the results on the same graph. It's important to note that the command plot(t,x)
+        is placed within the loop.
+    """
+
+    # Loop through list of three driving frequencies (100%, 90%, 50% of omega0)
+    for omegad in (omega, 0.9 * omega, 0.5 * omega):
+        # Define the anonymous function, including the changing omegad
+        lfun = lambda t, y,: rf.driven_pendulum(t, y, b, omega, omegad)
+        # Call the solver for this definition of lfun
+        result = integrate.solve_ivp(fun=lfun,
+                                     t_span=(0, tf),
+                                     y0=y0,
+                                     method="RK45",
+                                     t_eval=t)
+        # Store result of this run in variables t, x, v
+        t = result.t
+        x, v = result.y
+        # Plot the result x(t) for this run, lable it with omegad as well
+        plt.plot(t, x, label='$x(t): \omega_d =${}'.format(omegad))
+    # End of loop, continue with next omegad
+    # Out of the loop
+    # Save and show plot
+    plt.legend()  # Make the plot labels visible
+    #plt.savefig('Oscillator-driven-multi.pdf', bbox_inches ='tight')
+    plt.show()
+
+
 def main():
    
 
@@ -25,42 +58,7 @@ def main():
     # creates an array of the time steps
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
-    lfun = lambda t, y, : rf.damped_pendulum(t, y, b, omega0)
-
-    # Calls the method integrate.solve_ivp()
-    result = integrate.solve_ivp(fun=lfun,  # The function defining the derivative
-                                 t_span=(t0, tf),  # Initial and final times
-                                 y0=y0,  # Initial state
-                                 method="RK45",  # Integration method
-                                 t_eval=t)  # Time points for result to be defined at
-
-    # Read the solution and time from the result array returned by Scipy
-    x, v = result.y
-    t = result.t
-
-    
-    # Pre-initialize figure and axes
-    fig, (ax_time, ax_phase) = plt.subplots(1, 2, figsize=(12, 5))
-
-    # time evolution subplot
-    ax_time.set_xlabel("Time (s)")
-    ax_time.set_ylabel("Amplitiude")
-    ax_time.plot(t, x, label=r"$x(t)$")
-    ax_time.plot(t, v, label=r"$v(t)$")
-    ax_time.legend(loc=1)
-    
-
-    # phase space subplot
-    rf.phase_space(ax_phase, x, v)
-    
-    
-    # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    #filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
-
-    # saves and displays the file
-    #plt.savefig(filename, bbox_inches='tight')
-    #print("Output file saved to {}.".format(filename))
-    plt.show()
+    loop_through(t,omega0, b, tf, y0)
 
 if __name__ == '__main__':
     main()
