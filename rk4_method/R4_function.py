@@ -11,7 +11,7 @@ def damped_pendulum(t, y, b, omega0):
 
 def phase_space(ax, x, v, label = None):
     """Plot phase space (v vs. x) on a given Axes object."""
-    ax.plot(v, x, 'k',label=label)
+    ax.plot(x, v, 'k',label=label)
     ax.axis('equal')
-    ax.set_xlabel(r"$Velocity$")
-    ax.set_ylabel(r"$Position$")
+    ax.set_xlabel(r"$Position$")
+    ax.set_ylabel(r"$Velocity$")
