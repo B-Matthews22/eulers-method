@@ -5,9 +5,9 @@ from scipy import integrate
 from pathlib import Path
 
 
-def simple_pendulum(t, y):
+def simple_pendulum(t, y, m, k):
     x, v = y  # extracts the x and v values from the tuple
-    dydt = np.array([v, -x])  # generates an array with the rates of change: dxdt = v, dvdt = -x
+    dydt = np.array([v, -(k/m) * x])  # generates an array with the rates of change: dxdt = v, dvdt = -x
     return dydt  # returns the array
 
 
@@ -15,8 +15,8 @@ def phase_space(ax, x, v, label = None):
     """Plot phase space (v vs. x) on a given Axes object."""
     ax.plot(v, x, 'k',label=label)
     ax.axis('equal')
-    ax.set_xlabel(r"$Position$")
-    ax.set_ylabel(r"$Velocity$")
+    ax.set_xlabel(r"$Velocity$")
+    ax.set_ylabel(r"$Position$")
 
 def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
@@ -33,6 +33,8 @@ def main():
     # define the initial parameters
     x0 = 0  # initial position
     v0 = 1  # initial velocity
+    m = 2
+    k = 0.3
     y0 = (x0, v0)  # initial state
     t0 = 0  # initial time
 
@@ -49,7 +51,8 @@ def main():
     result = integrate.solve_ivp(fun=simple_pendulum,  # The function defining the derivative
                                  t_span=(t0, tf),  # Initial and final times
                                  y0=y0,  # Initial state
-                                 method="RK45",  # Integration method
+                                 method="RK45",
+                                 args = (m,k), # Integration method
                                  t_eval=t)  # Time points for result to be defined at
 
     # Read the solution and time from the result array returned by Scipy
