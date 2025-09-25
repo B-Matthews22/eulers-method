@@ -11,7 +11,7 @@ def main():
     # define the initial parameters
     x0     = 1  # initial position
     v0     = 0  # initial velocity
-    b      = 2
+    b      = 3
     omega0 = 1
     y0     = (x0, v0)  # initial state
     t0     = 0  # initial time
