@@ -11,6 +11,8 @@ def main():
     # define the initial parameters
     x0 = 0  # initial position
     v0 = 1  # initial velocity
+    b = 0.1
+    omega0 = 1
     y0 = (x0, v0)  # initial state
     t0 = 0  # initial time
 
@@ -28,6 +30,7 @@ def main():
                                  t_span=(t0, tf),  # Initial and final times
                                  y0=y0,  # Initial state
                                  method="RK45",  # Integration method
+                                 args = (b,omega0),
                                  t_eval=t)  # Time points for result to be defined at
 
     # Read the solution and time from the result array returned by Scipy
