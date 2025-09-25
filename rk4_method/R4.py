@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import R4_function as rf
 
 from scipy import integrate
 from pathlib import Path
-from R4_function import
 
 def main():
    
@@ -24,7 +24,7 @@ def main():
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
     # Calls the method integrate.solve_ivp()
-    result = integrate.solve_ivp(fun=simple_pendulum,  # The function defining the derivative
+    result = integrate.solve_ivp(fun=rf.damped_pendulum,  # The function defining the derivative
                                  t_span=(t0, tf),  # Initial and final times
                                  y0=y0,  # Initial state
                                  method="RK45",  # Integration method
@@ -47,11 +47,11 @@ def main():
     
 
     # phase space subplot
-    phase_space(ax_phase, x, v)
+    rf.phase_space(ax_phase, x, v)
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
+    #filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
 
     # saves and displays the file
     #plt.savefig(filename, bbox_inches='tight')
