@@ -9,10 +9,12 @@ def main():
    
 
     # define the initial parameters
-    x0 = 0  # initial position
-    v0 = 1  # initial velocity
-    y0 = (x0, v0)  # initial state
-    t0 = 0  # initial time
+    x0     = 0  # initial position
+    v0     = 1  # initial velocity
+    b      = 0.1
+    omega0 = 1
+    y0     = (x0, v0)  # initial state
+    t0     = 0  # initial time
 
     # define the final time and the number of time steps
     tf = 5*np.pi  # final time
@@ -23,8 +25,10 @@ def main():
     # creates an array of the time steps
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
+    lfun = lambda t, y, : rf.damped_pendulum(t, y, b, omega0)
+
     # Calls the method integrate.solve_ivp()
-    result = integrate.solve_ivp(fun=rf.damped_pendulum,  # The function defining the derivative
+    result = integrate.solve_ivp(fun=lfun,  # The function defining the derivative
                                  t_span=(t0, tf),  # Initial and final times
                                  y0=y0,  # Initial state
                                  method="RK45",  # Integration method
