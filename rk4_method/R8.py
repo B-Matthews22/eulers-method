@@ -14,7 +14,7 @@ def driven_pendulum(t, y, b, omega_0, A, omega_d):
     return dydt
 
 
-def double_loop(y0, t0, tf, n, omega_0, A):
+def double_loop(y0, tf, n, omega_0, A):
     """
     The code in this function needs to be extracted and incorporated into existing code
     """
@@ -25,13 +25,13 @@ def double_loop(y0, t0, tf, n, omega_0, A):
     # define the driving frequencies over which your inner loop will iterate
     # I recommend using a numpy linspace.
     # Consider: why am I defining this outside the loop?  Is that OK
-    driving_frequencies = np.linspace(0, 2*omega_0, 1000)
+    driving_frequencies = np.linspace(0, 2*omega_0, 100)
 
     # define your resonant frequency
     omega = 1.
 
     # creates an array of the time steps
-    t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
+    t = np.linspace(0.8*tf, tf, n)  # Points at which output will be evaluated
 
     # First (outer) loop through Damping coefficients
     for b in damping_coefficients:
@@ -65,19 +65,19 @@ def main():
    
 
     # define the initial parameters
-    x0      = 1  # initial position
-    v0      = 0  # initial velocity
+    x0      = 0  # initial position
+    v0      = 1  # initial velocity
     A       = 1
     omega_0 = 1
     y0      = (x0, v0)  # initial state
     t0      = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 20*np.pi  # final time
+    tf = 500  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
 
-    double_loop(y0, t0, tf, n, omega_0, A)
+    double_loop(y0, tf, n, omega_0, A)
 
 if __name__ == '__main__':
     main()
