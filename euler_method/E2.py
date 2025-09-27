@@ -3,8 +3,8 @@ from pathlib import Path
 import numpy as np
 
 #variables
-dt = 0.01
-t_max = 20
+dt = 0.05
+t_max = 9
 
 #initial conditions
 x_0 = [3,2,1,0.5,0,-0.5,-0.7]
@@ -36,14 +36,14 @@ x_vs_t  = fig.add_subplot()
 
 for x in x_0:
     position, time = diff_func(x,t_0,dt,t_max)
-    x_vs_t.plot(time, position, label=f'x_0={x}')
+    x_vs_t.plot(time, position, label=f'x$_{0}$ = {x}')
 
 #This is for the x = sqrt(t) curve we need to compare our approximations to
 root_t = [np.sqrt(t) for t in time]            
 
 x_vs_t.set_xlabel("Time t")
 x_vs_t.set_ylabel("x(t)")
-x_vs_t.plot(time,root_t, color = "black", label = "x = sqrt(t)",linestyle = "-.")
+x_vs_t.plot(time,root_t, color = "black", label = "x = $\sqrt{t}$",linestyle = "-.")
 x_vs_t.legend()
 
 filename = generate_path(basename='E2-Graph', extension='svg')  # uses the function defined above
