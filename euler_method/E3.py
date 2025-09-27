@@ -45,7 +45,7 @@ def diff_funcs(x_0,y_0,t_0,dt,t_max): #eulers method to approximate sine wave
     return position, time
 
 
-fig     =  plt.figure(figsize = (12,6))
+fig     =  plt.figure(figsize = (10,5))
 x_vs_t  = fig.add_subplot(2,1,1)
 err     = fig.add_subplot(2,1,2)
 err.set_xlabel("Time t")

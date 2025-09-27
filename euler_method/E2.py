@@ -3,8 +3,8 @@ from pathlib import Path
 import numpy as np
 
 #variables
-dt = 0.001
-t_max = 1000
+dt = 0.05
+t_max = 500
 
 #initial conditions
 x_0 = [0]

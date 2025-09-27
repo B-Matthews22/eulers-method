@@ -68,7 +68,7 @@ for dt_val in dt:
 x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "-." , label = "x = sin(t)")
 #x_vs_t.axhline(0,color="black")
 err.axhline(0,color="black",linestyle = "-.")
-x_vs_t.legend(loc=3)
+x_vs_t.legend(loc=2)
 err.legend()
 x_vs_t.axis([0,t_max,-1.2,1.2])
 err.axis([0,t_max,0,0.5])

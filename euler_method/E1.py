@@ -30,7 +30,7 @@ def euler_decay(x_0, t_0, t_f, dt, tau):
     return np.array(time), np.array(N), np.array(N_true)
 
 fig, axes = plt.subplots(
-    2, 1, figsize=(12, 6), sharex=True,
+    2, 1, figsize=(8, 6), sharex=True,
     gridspec_kw={'height_ratios': [3, 1]}
 )
 
@@ -51,7 +51,7 @@ axes[1].set_xlabel('Time t')
 axes[1].set_ylabel('Error')
 
 
-plt.tight_layout()
+#plt.tight_layout()
 
 filename = generate_path(basename='Decay-Error-Graph', extension='svg')  # uses the function defined above
 
