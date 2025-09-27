@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 from scipy import integrate
 from pathlib import Path
 
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
 
 
 def driven_pendulum(t, y, b, omega_0, A, omega_d):
@@ -56,8 +63,11 @@ def double_loop(y0, tf, n, omega_0, A):
 
         # Out of the inner loop
         # Save plot of amplitudes
-        plt.plot(driving_frequencies, amplitudes)
+        plt.plot(driving_frequencies, amplitudes,label = f"b = {b}")
         # End of outer loop
+    plt.xlabel("$\omega$$_{d}$")
+    plt.ylabel("Amplitude")
+    plt.legend()
     plt.show()
 
 
@@ -78,6 +88,12 @@ def main():
     # Note: this does not mean the integrator will take only n steps
 
     double_loop(y0, tf, n, omega_0, A)
+
+    filename = generate_path(basename='R8_Graph', extension='svg')  # uses the function defined above
+
+    # saves and displays the file
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
 
 if __name__ == '__main__':
     main()
