@@ -5,6 +5,15 @@ import R4_function as rf
 from scipy import integrate
 from pathlib import Path
 
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
+
+
 def main():
    
 
@@ -54,11 +63,11 @@ def main():
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    #filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R4-graph', extension='png')  # uses the function defined above
 
     # saves and displays the file
-    #plt.savefig(filename, bbox_inches='tight')
-    #print("Output file saved to {}.".format(filename))
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
     plt.show()
 
 if __name__ == '__main__':
