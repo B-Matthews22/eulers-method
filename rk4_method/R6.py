@@ -5,6 +5,14 @@ import R4_function as rf
 from scipy import integrate
 from pathlib import Path
 
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
+
 
 def loop_through(t,omega, A, b, tf, y0):
     """
@@ -29,12 +37,12 @@ def loop_through(t,omega, A, b, tf, y0):
         t = result.t
         x, v = result.y
         # Plot the result x(t) for this run, lable it with omegad as well
-        plt.plot(t, x, label = f"omegad = {omegad}")
+        plt.plot(t, x, label = f"$\omega$$_{"d"}$ = {omegad}")
         
     # End of loop, continue with next omegad
     # Out of the loop
     # Save and show plot
-    plt.xlabel("Time (s)")
+    plt.xlabel("Time t")
     plt.ylabel("Amplitiude")
     plt.legend()  # Make the plot labels visible
     #plt.savefig('Oscillator-driven-multi.pdf', bbox_inches ='tight')
@@ -63,6 +71,12 @@ def main():
     t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
 
     loop_through(t,omega0, A, b, tf, y0)
+
+    filename = generate_path(basename='R6_Graph', extension='png')  # uses the function defined above
+
+    # saves and displays the file
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
 
 if __name__ == '__main__':
     main()
