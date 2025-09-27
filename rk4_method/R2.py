@@ -1,6 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import integrate
+from pathlib import Path
+
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
+
 
 def diff_rl(t,i,v, r, l):
     """
@@ -44,6 +54,14 @@ def main():
     t = result.t
 
     plt.plot(t,i)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Current (A)")
+     # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    filename = generate_path(basename='R2-Graph', extension='svg')  # uses the function defined above
+
+    # saves and displays the file
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
     plt.show()
 
 if __name__ == "__main__":
