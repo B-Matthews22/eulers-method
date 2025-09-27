@@ -26,7 +26,7 @@ def amplitudes(tf, n, omega_0, b, A, y0):
     amplitudes = []  # Create empty list to store amplitudes
     t = np.linspace(0.8*tf, tf, n)  # Change time array to include only later points
 
-    driving_freq = np.linspace(0, 2*omega_0, 200)  # Create range of omega_d 20%-200% of omega_0
+    driving_freq = np.linspace(0, 2*omega_0, 2000)  # Create range of omega_d 20%-200% of omega_0
 
     # Loop through driving frequencies
     for omega_d in driving_freq:
@@ -48,10 +48,9 @@ def amplitudes(tf, n, omega_0, b, A, y0):
     # Out of the loop
     # Plot the amplitudes
     plt.plot(driving_freq, amplitudes,label = f"b = {b}")
-    plt.xlabel("$\omega$$_{d}$")
+    plt.xlabel("$\omega$$_{d}$[$\omega$$_{0}$]")
     plt.ylabel("Amplitude")
     plt.legend()
-    plt.show()
 
 
 def main():
@@ -75,11 +74,12 @@ def main():
     amplitudes(tf, n, omega_0, b, A, y0)
     
 
-    filename = generate_path(basename='R7_Graph', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R7_Graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')
     print("Output file saved to {}.".format(filename))
+    plt.show()
 
 if __name__ == '__main__':
     main()

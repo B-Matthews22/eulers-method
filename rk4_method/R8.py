@@ -65,10 +65,9 @@ def double_loop(y0, tf, n, omega_0, A):
         # Save plot of amplitudes
         plt.plot(driving_frequencies, amplitudes,label = f"b = {b}")
         # End of outer loop
-    plt.xlabel("$\omega$$_{d}$")
+    plt.xlabel("$\omega$$_{d}$[$\omega$$_{0}$]")
     plt.ylabel("Amplitude")
     plt.legend()
-    plt.show()
 
 
 def main():
@@ -94,6 +93,7 @@ def main():
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')
     print("Output file saved to {}.".format(filename))
+    plt.show()
 
 if __name__ == '__main__':
     main()

@@ -65,7 +65,7 @@ def main():
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    filename = generate_path(basename='R5_Graph', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R5_Graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')

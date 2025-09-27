@@ -53,9 +53,12 @@ def main():
     i = result.y[0]
     t = result.t
 
-    plt.plot(t,i)
+    i_exact = exact_solution_rl(v,r,l,t)
+    plt.plot(t, i_exact,color = "r",label = "Exact")
+    plt.plot(t,i, color = "k", linestyle = "-.", label = "Approximation")
     plt.xlabel("Time (s)")
     plt.ylabel("Current (A)")
+    plt.legend()
      # creates the path to store the data. Note that the data is not stored in the code repo directory.
     filename = generate_path(basename='R2-Graph', extension='svg')  # uses the function defined above
 
@@ -63,6 +66,12 @@ def main():
     plt.savefig(filename, bbox_inches='tight')
     print("Output file saved to {}.".format(filename))
     plt.show()
+    
+    err = []
+    for x in range(len(i)):
+        err.append(abs(i[x]-i_exact[x]))
+    max_err = np.max(err)
+    print(float(f"{max_err:.4f}"))
 
 if __name__ == "__main__":
     main()

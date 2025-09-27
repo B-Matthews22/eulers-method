@@ -42,11 +42,9 @@ def loop_through(t,omega, A, b, tf, y0):
     # End of loop, continue with next omegad
     # Out of the loop
     # Save and show plot
-    plt.xlabel("Time t")
+    plt.xlabel("Time (s)")
     plt.ylabel("Amplitiude")
     plt.legend()  # Make the plot labels visible
-    #plt.savefig('Oscillator-driven-multi.pdf', bbox_inches ='tight')
-    plt.show()
 
 
 def main():
@@ -72,11 +70,12 @@ def main():
 
     loop_through(t,omega0, A, b, tf, y0)
 
-    filename = generate_path(basename='R6_Graph', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R6_Graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')
     print("Output file saved to {}.".format(filename))
+    plt.show()
 
 if __name__ == '__main__':
     main()
