@@ -3,11 +3,11 @@ from pathlib import Path
 import numpy as np
 
 #variables
-dt = 0.05
-t_max = 9
+dt = 0.001
+t_max = 1000
 
 #initial conditions
-x_0 = [3,2,1,0.5,0,-0.5,-0.7]
+x_0 = [0]
 t_0 = 0
 
 def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
@@ -36,7 +36,7 @@ x_vs_t  = fig.add_subplot()
 
 for x in x_0:
     position, time = diff_func(x,t_0,dt,t_max)
-    x_vs_t.plot(time, position, label=f'x$_{0}$ = {x}')
+    x_vs_t.plot(time, position, label=f'Euler Approximation')
 
 #This is for the x = sqrt(t) curve we need to compare our approximations to
 root_t = [np.sqrt(t) for t in time]            
