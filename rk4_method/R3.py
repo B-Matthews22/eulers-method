@@ -39,7 +39,7 @@ def main():
     t0 = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 5*np.pi  # final time
+    tf = 50*np.pi  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
     # Scipy will take more steps if required to control the error in the solution
@@ -76,11 +76,11 @@ def main():
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R3-Graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
-    #plt.savefig(filename, bbox_inches='tight')
-    #print("Output file saved to {}.".format(filename))
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
     plt.show()
 
 if __name__ == '__main__':
