@@ -5,6 +5,16 @@ import R4_function as rf
 from scipy import integrate
 from pathlib import Path
 
+
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
+
+
 def main():
    
 
@@ -17,7 +27,7 @@ def main():
     t0     = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 5*np.pi  # final time
+    tf = 20  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
     # Scipy will take more steps if required to control the error in the solution
@@ -43,7 +53,7 @@ def main():
     fig, (ax_time, ax_phase) = plt.subplots(1, 2, figsize=(12, 5))
 
     # time evolution subplot
-    ax_time.set_xlabel("Time (s)")
+    ax_time.set_xlabel("Time t")
     ax_time.set_ylabel("Amplitiude")
     ax_time.plot(t, x, label=r"$x(t)$")
     ax_time.plot(t, v, label=r"$v(t)$")
@@ -55,11 +65,11 @@ def main():
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    #filename = generate_path(basename='Harmonic-init', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R5_Graph', extension='png')  # uses the function defined above
 
     # saves and displays the file
-    #plt.savefig(filename, bbox_inches='tight')
-    #print("Output file saved to {}.".format(filename))
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
     plt.show()
 
 if __name__ == '__main__':
