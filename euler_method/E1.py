@@ -30,7 +30,7 @@ def euler_decay(x_0, t_0, t_f, dt, tau):
     return np.array(time), np.array(N), np.array(N_true)
 
 fig, axes = plt.subplots(
-    2, 1, figsize=(10, 8), sharex=True,
+    2, 1, figsize=(12, 6), sharex=True,
     gridspec_kw={'height_ratios': [3, 1]}
 )
 
