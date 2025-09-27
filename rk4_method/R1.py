@@ -1,10 +1,8 @@
-# code courtesy of Adam Dempsey
-# modified for PHY1055 by Oisín Creaner
-
 # import libraries
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import integrate
+from pathlib import Path
 
 # define the nonlinear derivative function
 def nonlinear1(t, y,a,b):
@@ -16,6 +14,15 @@ def nonlinear1(t, y,a,b):
 
     # return the value
     return dydt
+
+
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
 
 
 def main():
@@ -57,7 +64,13 @@ def main():
         plt.plot(t,y,label = f"a = {a}, b = {b}")
     plt.legend()
     plt.xlabel("Time t")
-    plt.ylabel("f(y,t)")
+    plt.ylabel("Amplitude")
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    filename = generate_path(basename='R1-Graph', extension='svg')  # uses the function defined above
+
+    # saves and displays the file
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
     plt.show()
 
 
