@@ -15,55 +15,54 @@ def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basenam
 
 
 def main():
-   
+    # define the damping values to test
+    b_values = [0.5, 2.0, 5.0]  
+    labels = ["Underdamped", "Critical", "Overdamped"]
 
-    # define the initial parameters
-    x0 = 0  # initial position
-    v0 = 1  # initial velocity
-    b = 0.1
+    # initial parameters
+    x0 = 1
+    v0 = 0
     omega0 = 1
-    y0 = (x0, v0)  # initial state
-    t0 = 0  # initial time
+    y0 = (x0, v0)
+    t0 = 0
+    tf = 30
+    n = 1001
+    t_eval = np.linspace(t0, tf, n)
 
-    # define the final time and the number of time steps
-    tf = 5*np.pi  # final time
-    n = 1001  # Number of points at which output will be evaluated
-    # Note: this does not mean the integrator will take only n steps
-    # Scipy will take more steps if required to control the error in the solution
+    # create 2x3 subplots
+    fig, axes = plt.subplots(2, 3, figsize=(15, 8))
 
-    # creates an array of the time steps
-    t = np.linspace(t0, tf, n)  # Points at which output will be evaluated
+    for i, (b, label) in enumerate(zip(b_values, labels)):
+        # integrate system
+        result = integrate.solve_ivp(
+            fun=rf.damped_pendulum,
+            t_span=(t0, tf),
+            y0=y0,
+            method="RK45",
+            args=(b, omega0),
+            t_eval=t_eval
+        )
+        x, v = result.y
+        t = result.t
 
-    # Calls the method integrate.solve_ivp()
-    result = integrate.solve_ivp(fun=rf.damped_pendulum,  # The function defining the derivative
-                                 t_span=(t0, tf),  # Initial and final times
-                                 y0=y0,  # Initial state
-                                 method="RK45",  # Integration method
-                                 args = (b,omega0),
-                                 t_eval=t)  # Time points for result to be defined at
+        # time evolution subplot (top row)
+        ax_time = axes[0, i]
+        ax_time.plot(t, x, label=r"$x(t)$")
+        ax_time.plot(t, v, label=r"$v(t)$")
+        ax_time.set_xlabel("Time (s)")
+        ax_time.set_ylabel("Amplitude")
+        ax_time.set_title(f"{label} (b={b})")
+        ax_time.legend(loc=1)
 
-    # Read the solution and time from the result array returned by Scipy
-    x, v = result.y
-    t = result.t
+        # phase space subplot (bottom row)
+        ax_phase = axes[1, i]
+        rf.phase_space(ax_phase, x, v)
 
-    
-    # Pre-initialize figure and axes
-    fig, (ax_time, ax_phase) = plt.subplots(1, 2, figsize=(12, 5))
-
-    # time evolution subplot
-    ax_time.set_xlabel("Time (s)")
-    ax_time.set_ylabel("Amplitiude")
-    ax_time.plot(t, x, label=r"$x(t)$")
-    ax_time.plot(t, v, label=r"$v(t)$")
-    ax_time.legend(loc=1)
-    
-
-    # phase space subplot
-    rf.phase_space(ax_phase, x, v)
+    plt.tight_layout()
     
     
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    filename = generate_path(basename='R4-graph', extension='png')  # uses the function defined above
+    filename = generate_path(basename='R4-graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')

@@ -13,10 +13,10 @@ def simple_pendulum(t, y, m, k):
 
 def phase_space(ax, x, v, label = None):
     """Plot phase space (v vs. x) on a given Axes object."""
-    ax.plot(v, x, 'k',label=label)
+    ax.plot(x, v, 'k',label=label)
     ax.axis('equal')
-    ax.set_xlabel(r"$Velocity$")
-    ax.set_ylabel(r"$Position$")
+    ax.set_xlabel(r"$Position$")
+    ax.set_ylabel(r"$Velocity$")
 
 def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
@@ -33,13 +33,13 @@ def main():
     # define the initial parameters
     x0 = 0  # initial position
     v0 = 1  # initial velocity
-    m = 2
-    k = 0.3
+    m = 1
+    k = 1
     y0 = (x0, v0)  # initial state
     t0 = 0  # initial time
 
     # define the final time and the number of time steps
-    tf = 50*np.pi  # final time
+    tf = 4*np.pi  # final time
     n = 1001  # Number of points at which output will be evaluated
     # Note: this does not mean the integrator will take only n steps
     # Scipy will take more steps if required to control the error in the solution
