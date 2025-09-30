@@ -24,7 +24,7 @@ def loop_through(t,omega, A, b, tf, y0):
     """
 
     # Loop through list of three driving frequencies (100%, 90%, 50% of omega0)
-    for omegad in (omega, 0.9 * omega, 0.5 * omega):
+    for omegad in (2*omega, omega, 0.25 * omega):
         # Define the anonymous function, including the changing omegad
         lfun = lambda t, y,: rf.driven_pendulum(t, y, b, omega, A, omegad)
         # Call the solver for this definition of lfun
@@ -53,7 +53,7 @@ def main():
     # define the initial parameters
     x0     = 1  # initial position
     v0     = 0  # initial velocity
-    b      = 0.1
+    b      = 0.5
     omega0 = 1
     A = 2
     y0     = (x0, v0)  # initial state

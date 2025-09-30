@@ -64,6 +64,9 @@ for dt_val in dt:
     x_exact,v_exact, t_exact = wave(len(time))
     x_vs_t.plot(time, position)
     err.plot(time, abs(position-x_exact),label=f'dt={dt_val:.4f}')
+    err.set_xlabel("Time (s)")
+    err.set_ylabel("Error")
+    x_vs_t.set_ylabel("Amplitude")
 
 x_vs_t.plot(t_exact, x_exact, color = "black",linestyle = "-." , label = "x = sin(t)")
 #x_vs_t.axhline(0,color="black")

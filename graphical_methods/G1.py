@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import graph_functions
+import graph_functions as gr
 
 
 def get_vector(x, y):
@@ -33,7 +33,7 @@ def main():
 
 
     
-
+    pass
 
 if __name__ == '__main__':
     main()
