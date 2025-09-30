@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import graph_functions as gr
+import graph_function as gr
 
 
 def get_vector(x, y):
