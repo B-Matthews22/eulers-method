@@ -1,6 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import graph_function as gr
+import G1
 
+
+def get_vector(x, y):
+    
+    z = np.sqrt(x**2 + y**2)
+    vx , vy = np.gradient(z) , np.gradient(z)
+
+    return vx, vy
 
 def main():
     plt.close()
