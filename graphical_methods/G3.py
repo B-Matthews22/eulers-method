@@ -12,19 +12,16 @@ def pendulum(x , v, b, omega):
 
 
 def main():
-    start     = -np.pi
-    stop      = np.pi
+    start     = -2*np.pi
+    stop      = 2*np.pi
     stepsize  = 0
     numpoints = 101
-    plt.close('all')
+    
     x , v = gr.grid_options(start, stop, stepsize, numpoints, option = "linspace")
     dx, dv = pendulum(x, v, b = 2, omega = 1)
-    plt.figure(figsize=(6,6))
-    plt.gca().set_aspect('equal', adjustable='box')  # Make plot box square
-    plt.xlabel('x')
-    plt.ylabel('v')
-    plt.quiver(x, v, dx, dv)  # plot field as quiver
-    plt.streamplot(x, v, dx, dv)  # plot streamlines of field.
+    gr.reduced_density(x, v, dx, dv, label = 0, x_pos=0.9, y_pos=0.9, key_size=2, reduction=5)
+    #plt.streamplot(x, v, dx, dv)     # plot streamlines of field
+    gr.density_change(x, v, dx, dv)  # plot less streamlines of field
     plt.show()
 
 
