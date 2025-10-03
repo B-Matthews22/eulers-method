@@ -32,7 +32,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
                    label=f'{label}')  # label using LaTex notation
 
     # creates the quiver key as above in the position specified
-    plt.quiverkey(q, x_pos, y_pos, key_size, labelpos='E', coordinates='figure')
+    plt.quiverkey(q, x_pos, y_pos, key_size, label = ".", labelpos='E', coordinates='figure')
     plt.legend()
 
 
