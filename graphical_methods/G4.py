@@ -24,7 +24,7 @@ def main():
     plt.show()
 
     lfun = lambda t, x: verhulst(x, r, k)
-    t_eval = np.linspace(start, stop, numpoints)
+    t = np.linspace(start, stop, numpoints)
 
     initial_conditions = [0.1, 5, 15, 25]  # different starting values
 
@@ -34,7 +34,7 @@ def main():
                                     t_span=(start, stop),
                                     y0=[x0],
                                     method="RK45",
-                                    t_eval=t_eval)
+                                    t_eval=t)
         plt.plot(result.t, result.y[0], label=f"x₀ = {x0}")
 
     plt.axhline(y=k, color="red", linestyle="--", label=f"K = {k}")

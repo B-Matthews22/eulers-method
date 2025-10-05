@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import graph_function as gr
+from pathlib import Path
 
 
 def get_vector(x, y):
@@ -48,7 +49,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
     
     # plots a scatter plot with the same reduction factor
     # specifies the colour of the points and their size
-    plt.scatter(x[::reduction, ::reduction], y[::reduction, ::reduction], color='r', s=3)
+    #plt.scatter(x[::reduction, ::reduction], y[::reduction, ::reduction], color='r', s=3)
 
     q = plt.quiver(x[::reduction, ::reduction], y[::reduction, ::reduction],  # coordinates at reduced density
                    vx[::reduction, ::reduction], vy[::reduction, ::reduction],  # arrow x/y lengths at reduced density
@@ -56,7 +57,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
                    label=f'{label}')  # label using LaTex notation
 
     # creates the quiver key as above in the position specified
-    plt.quiverkey(q, x_pos, y_pos, key_size, r'$2\frac{m}{s}$', labelpos='E', coordinates='figure')
+    #plt.quiverkey(q, x_pos, y_pos, key_size,label=False, labelpos='E', coordinates='figure')
     plt.legend()
 
 
@@ -70,14 +71,22 @@ def main():
     x , y   = gr.grid_options(start, stop, stepsize, numpoints, option = "linspace")
     vx , vy = get_vector(x , y)
 
-    add_legend(x, y, vx, vy, label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.show()
+    #add_legend(x, y, vx, vy, label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
+    #plt.xlabel('x')
+    #plt.ylabel('y')
+    #plt.show()
 
     reduced_density(x, y, vx, vy, label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
     plt.xlabel('x')
     plt.ylabel('y')
+
+        # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    filename = gr.generate_path(basename='G1-Graph', extension='svg')  # uses the function defined above
+
+    # saves and displays the file
+    plt.savefig(filename, bbox_inches='tight')
+    print("Output file saved to {}.".format(filename))
+    
     plt.show()
 
 

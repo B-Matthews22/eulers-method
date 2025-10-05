@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pathlib as Path
 
 def grid_options(start, stop, stepsize, numpoints, option):
     
@@ -122,3 +123,11 @@ def both_streamlines(x, y, dx, dy):
     strm = plt.streamplot(x, y, dx, dy, linewidth=lw, color=mag, cmap='gnuplot')
     plt.colorbar(strm.lines, fraction=0.046, pad=0.04)
 
+
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path

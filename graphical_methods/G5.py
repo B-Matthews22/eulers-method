@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from scipy import integrate
 import numpy as np
-import graph_function as gr  # uses your functions
+import graph_function as gr 
 
 def rf_vector(x, y, a, b, c, d):
     dx = a * x - b * x * y
@@ -27,12 +27,12 @@ def main():
     y0 = (4, 2)       # initial rabbit and fox population
     t0 = 0
     tf = 10
-    n = 100
+    n = 501
     a, b, c, d = 4, 2, 3/4, 1  # model parameters
 
     # Create grid and vector field
     x, y = gr.grid_options(start=-1, stop=5, stepsize=1, numpoints=101, option="linspace")
-    dx, dy = rf_vector(x, y, a, b, c, d)
+    dx, dy = rabbit_fox(t, y0, a, b, c, d)
 
     # Plot the reduced vector density and seed points
     gr.reduced_density(x, y, dx, dy, label=0, x_pos=0.9, y_pos=0.9, key_size=0, reduction=5)
