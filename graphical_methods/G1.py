@@ -4,6 +4,15 @@ import graph_function as gr
 from pathlib import Path
 
 
+def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+    # creates the path to store the data. Note that the data is not stored in the code repo directory.
+    # uses the method Path.home() to find the home directory in any OS
+    output_folder = home_folder + subfolder  # appends a subdirectory within it.
+    filename = basename + '.' + extension  # defines the filename the output is to be saved in
+    output_path = output_folder + filename  # creates the output path
+    return output_path
+
+
 def get_vector(x, y):
     """
     x and y should be of the same length for most applications you'd use this for,
@@ -81,7 +90,7 @@ def main():
     plt.ylabel('y')
 
         # creates the path to store the data. Note that the data is not stored in the code repo directory.
-    filename = gr.generate_path(basename='G1-Graph', extension='svg')  # uses the function defined above
+    filename = generate_path(basename='G1-Graph', extension='svg')  # uses the function defined above
 
     # saves and displays the file
     plt.savefig(filename, bbox_inches='tight')
@@ -92,3 +101,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
