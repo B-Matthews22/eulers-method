@@ -34,7 +34,7 @@ def main():
     plt.set_cmap('winter_r')  # change color of map
 
     # Plot Gradient as quiver plot
-    skip = 4  # Number of points to skip
+    skip = 5  # Number of points to skip
 
     # create coarse grid
     x_skipped, y_skipped = x[::skip, ::skip], y[::skip, ::skip]  # note the indexing [start:end:skip]
