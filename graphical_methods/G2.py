@@ -3,7 +3,7 @@ import numpy as np
 import pathlib as Path
 
 
-def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basename='output', extension='txt'):
+def generate_path(home_folder= 'C:/Users/HP/', subfolder='/Documents/', basename='output', extension='txt'):
     # creates the path to store the data. Note that the data is not stored in the code repo directory.
     # uses the method Path.home() to find the home directory in any OS
     output_folder = home_folder + subfolder  # appends a subdirectory within it.
