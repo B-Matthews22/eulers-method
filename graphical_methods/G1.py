@@ -80,14 +80,30 @@ def main():
     x , y   = gr.grid_options(start, stop, stepsize, numpoints, option = "linspace")
     vx , vy = get_vector(x , y)
 
-    #add_legend(x, y, vx, vy, label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
-    #plt.xlabel('x')
-    #plt.ylabel('y')
-    #plt.show()
+    plt.figure(figsize=(12, 6))
+    
 
-    reduced_density(x, y, vx, vy, label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
+    # first column figure
+    plt.subplot(1, 2, 1)
+    plt.quiver(x, y, vx, vy, pivot='mid', label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
+    plt.xlabel(r"$x$")
+    plt.ylabel(r"$y$")
+    plt.text(0.05, 0.05, "(a)",
+            fontsize=12, fontweight='bold', va='top', ha='left')
+    plt.legend()
+
+    reduction = 5
+    # second column figure
+    plt.subplot(1, 2, 2)
+    plt.quiver(x[::reduction, ::reduction], y[::reduction, ::reduction],  # coordinates at reduced density
+                   vx[::reduction, ::reduction], vy[::reduction, ::reduction],  # arrow x/y lengths at reduced density
+                   pivot='mid', # position of the pivot of the arrow
+                   label = "$v_x$ = cos($x$), $v_y$ = sin($y$)") 
     plt.xlabel('x')
     plt.ylabel('y')
+    plt.text(0.05, 0.05, "(b)", fontsize=12, 
+            fontweight='bold', va='top', ha='left')
+    plt.legend()
 
         # creates the path to store the data. Note that the data is not stored in the code repo directory.
     filename = generate_path(basename='G1-Graph', extension='svg')  # uses the function defined above
