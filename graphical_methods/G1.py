@@ -19,7 +19,7 @@ def get_vector(x, y):
     but this function doesn't check
     """
     vx = np.cos(x) * y
-    vy = np.sin(y) * x
+    vy = np.sin(x) * x
 
     return vx, vy
 
@@ -85,7 +85,7 @@ def main():
 
     # first column figure
     plt.subplot(1, 2, 1)
-    plt.quiver(x, y, vx, vy, pivot='mid', label = "$v_x$ = cos($x$), $v_y$ = sin($y$)")
+    plt.quiver(x, y, vx, vy, pivot='mid', label = "$v_x$ = $cos(x)\cdot y$, $v_y$ = $sin($x$)\cdot x$")
     plt.xlabel(r"$x$")
     plt.ylabel(r"$y$")
     plt.text(0.05, 0.05, "(a)",
@@ -98,7 +98,7 @@ def main():
     plt.quiver(x[::reduction, ::reduction], y[::reduction, ::reduction],  # coordinates at reduced density
                    vx[::reduction, ::reduction], vy[::reduction, ::reduction],  # arrow x/y lengths at reduced density
                    pivot='mid', # position of the pivot of the arrow
-                   label = "$v_x$ = cos($x$), $v_y$ = sin($y$)") 
+                   label = "$v_x$ = $cos(x)\cdot y$, $v_y$ = $sin($x$)\cdot x$") 
     plt.xlabel('x')
     plt.ylabel('y')
     plt.text(0.05, 0.05, "(b)", fontsize=12, 

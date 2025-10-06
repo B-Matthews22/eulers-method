@@ -25,7 +25,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
     
     # plots a scatter plot with the same reduction factor
     # specifies the colour of the points and their size
-    plt.scatter(x[::reduction, ::reduction], y[::reduction, ::reduction], color='r', s=3)
+    #plt.scatter(x[::reduction, ::reduction], y[::reduction, ::reduction], color='r', s=3)
 
     q = plt.quiver(x[::reduction, ::reduction], y[::reduction, ::reduction],  # coordinates at reduced density
                    vx[::reduction, ::reduction], vy[::reduction, ::reduction],  # arrow x/y lengths at reduced density
@@ -33,7 +33,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
                    label=f'{label}')  # label using LaTex notation
 
     # creates the quiver key as above in the position specified
-    plt.quiverkey(q, x_pos, y_pos, key_size, label = ".", labelpos='E', coordinates='figure')
+    #plt.quiverkey(q, x_pos, y_pos, key_size, label = "", labelpos='E', coordinates='figure')
     plt.legend()
 
 
@@ -119,7 +119,7 @@ def both_streamlines(x, y, dx, dy):
     These modifications can also be combined, creating coloured lines with varying thickness
     """
     mag = np.sqrt(dx ** 2 + dy ** 2)  # using numpy square root method
-    lw = 10 * mag/mag.max()
+    lw = 5 * mag/mag.max()
     strm = plt.streamplot(x, y, dx, dy, linewidth=lw, color=mag, cmap='gnuplot')
     plt.colorbar(strm.lines, fraction=0.046, pad=0.04)
 
