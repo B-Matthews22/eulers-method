@@ -72,7 +72,7 @@ def reduced_density(x, y, vx, vy, label, x_pos=0.9, y_pos=0.9, key_size=2, reduc
 
 
 def main():
-    start     = 0
+    start     = -2*np.pi
     stop      = 2*np.pi
     stepsize  = 0
     numpoints = 101

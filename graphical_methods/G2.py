@@ -38,7 +38,9 @@ def main():
     ax.set_title('$f(x,y)=\sqrt{x^2+y^2}$')
 
     # Plot scalar function as color plot (contour map)
+    contour = ax.contour(x, y, z, 50, cmap='plasma')
     contour = ax.contourf(x, y, z, 50, cmap='plasma')
+
 
     # Add colorbar that matches the height of the plot
     cbar = fig.colorbar(contour, ax=ax, fraction=0.046, pad=0.04, ticks = np.linspace(0,9,5,endpoint=True))
