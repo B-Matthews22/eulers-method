@@ -17,7 +17,7 @@ def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basenam
     output_path = output_folder + filename  # creates the output path
     return output_path
 
-def euler_decay(x_0, t_0, t_f, dt, tau): # isabella was here radiation
+def euler_decay(x_0, t_0, t_f, dt, tau): # isabella was here radiation is dangerous
     N = []
     N_true = []
     time = []
