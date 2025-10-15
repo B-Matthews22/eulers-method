@@ -35,7 +35,7 @@ fig, axes = plt.subplots(
     gridspec_kw={'height_ratios': [3, 1]}
 )
 
-# Top: Euler solutions vs exact
+# Top: Euler solutions vs exact # Isabella says this code is for comparison to euler method
 for h in dt_values:
     time, N, Nt = euler_decay(N_0, t_0, t_f, h, tau)
     axes[0].plot(time, N, '--', label=f'dt={h}')
@@ -49,7 +49,7 @@ for h in dt_values:
     error = np.abs(N - Nt)
     axes[1].plot(time, error)
 axes[1].set_xlabel('Time t')
-axes[1].set_ylabel('Error')
+axes[1].set_ylabel('Error') 
 
 
 #plt.tight_layout()
