@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from pathlib import Path
 import numpy as np
+# Isabella was heres
 
 # Parameters
 dt_values = [0.5, 0.1, 0.01]   # step sizes
@@ -16,7 +17,7 @@ def generate_path(home_folder=str(Path.home()), subfolder='/Documents/', basenam
     output_path = output_folder + filename  # creates the output path
     return output_path
 
-def euler_decay(x_0, t_0, t_f, dt, tau):
+def euler_decay(x_0, t_0, t_f, dt, tau): # isabella was here radiation
     N = []
     N_true = []
     time = []
